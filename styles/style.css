@@ -7,4 +7,12 @@ body {
 h1 {
   font-family: 'Share', sans-serif;
   font-size: 5em;
+  margin:0;
+}
+h2 {
+  font-family: 'Share', sans-serif;
+  font-size: 1.5em;
+}
+.charts-main {
+  margin: 5vh 0 5vh 0;
 }
