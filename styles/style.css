@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Encode+Sans|Share:700');
+body {
+  font-family: 'Encode Sans', sans-serif;
+  text-align: center;
+  margin: 5vh 10vw 5vw 10vh;
+}
+h1 {
+  font-family: 'Share', sans-serif;
+  font-size: 5em;
+}
