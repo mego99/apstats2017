@@ -25,14 +25,14 @@ d3.csv('data/olympics.csv',
 
     var y = d3.scaleLinear()
       .range([0,500])
-      .domain([40,0]);
+      .domain([34,0]);
 
     var w = (Math.max(document.documentElement.clientWidth, window.innerWidth || 0)) * .7;
     var topPadding = 10;
     var leftPadding = 30;
 
     var x = d3.scaleBand()
-      // .padding(0.1)
+      .padding(0.1)
       .range([0,w])
       .domain(data
         .map(function(d){return d.country})
@@ -43,21 +43,21 @@ d3.csv('data/olympics.csv',
 
     var yAxis = d3.axisLeft(y).ticks(20);
 
-    svg.append('g')
+    var gX = svg.append('g')
       .call(xAxis)
       .attr('transform','translate('+leftPadding+','+(500+topPadding)+')')
       .attr('class','x-axis');
 
-    svg.append('g')
-      .call(yAxis)
-      .attr('transform','translate('+leftPadding+','+topPadding+')');
+    var gold = '#ffc647';
+    var silver = '#e6e1db';
+    var bronze = '#ff7b50';
 
     svg.selectAll('.x-axis text')
       .attr('transform','translate(12,10) rotate(90) ')
       .attr('text-anchor','start');
 
     var chart = svg.append('g')
-      .attr('transform','translate('+leftPadding+','+topPadding+')');
+      .attr('transform','translate('+leftPadding+','+topPadding+')').attr('class','chart');
 
     var bars = chart.append('g').selectAll('.bar')
       .data(data)
@@ -65,9 +65,8 @@ d3.csv('data/olympics.csv',
         .attr('x',function(d){return x(d.country)})
         .attr('height',function(d){return 500 - y(d.total)})
         .attr('y',function(d){return y(d.total)})
-        .attr('width',33)
-        .attr('transform','translate(0,0)')
-        .style('fill','#f75521');
+        .attr('width',32)
+        .style('fill',bronze);
 
       var barsGold = chart.append('g').selectAll('.bar')
         .data(data)
@@ -75,20 +74,42 @@ d3.csv('data/olympics.csv',
           .attr('x',function(d){return x(d.country)})
           .attr('height',function(d){return 500 - y(d.silver + d.gold)})
           .attr('y',function(d){return y(d.silver + d.gold)})
-          .attr('width',33)
-          .attr('transform','translate(0,0)')
-          .style('fill','#f09b2a');
+          .attr('width',32)
+          .style('fill',silver);
 
       var barsGold = chart.append('g').selectAll('.bar')
         .data(data)
         .enter().append('rect')
           .attr('x',function(d){return x(d.country)})
-          .attr('height',function(d){return 500 - y(d.silver)})
-          .attr('y',function(d){return y(d.silver)})
-          .attr('width',33)
-          .attr('transform','translate(0,0)')
-          .style('fill','#d7d7d7');
+          .attr('height',function(d){return 500 - y(d.gold)})
+          .attr('y',function(d){return y(d.gold)})
+          .attr('width',32)
+          .style('fill',gold);
+
+          var gY = svg.append('g')
+            .call(yAxis)
+            .attr('transform','translate('+leftPadding+','+topPadding+')');
+
+      var legend = svg.append('g').attr('class','legend');
 
 
+      d3.select('.chart')
+        .call(d3.zoom()
+          .scaleExtent([1,1])
+          .on('zoom',zoomed)
+      );
+
+      svg.append('rect')
+        .attr('width','70vw')
+        .attr('height',620)
+        .style('fill','none')
+        .style('pointer-events','all')
+        .call(d3.zoom()
+          .on('zoom',zoomed));
+
+      function zoomed() {
+        chart.attr('transform','translate('+(d3.event.transform.x+leftPadding)+','+topPadding+')');
+        gX.call(xAxis).attr('transform','translate('+(d3.event.transform.x+leftPadding)+','+(500+topPadding)+')')
+      }
   }
 )
