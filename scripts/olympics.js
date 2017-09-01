@@ -21,15 +21,13 @@ d3.csv('data/olympics.csv',
   function(error, data){
     if (error) return console.error(error);
 
-    console.log(data);
-
     var y = d3.scaleLinear()
       .range([0,500])
       .domain([34,0]);
 
-    var w = (Math.max(document.documentElement.clientWidth, window.innerWidth || 0)) * .7;
     var topPadding = 10;
     var leftPadding = 30;
+    var w = ((Math.max(document.documentElement.clientWidth, window.innerWidth || 0)) * .7) - leftPadding;
 
     var x = d3.scaleBand()
       .padding(0.1)
@@ -65,7 +63,7 @@ d3.csv('data/olympics.csv',
         .attr('x',function(d){return x(d.country)})
         .attr('height',function(d){return 500 - y(d.total)})
         .attr('y',function(d){return y(d.total)})
-        .attr('width',32)
+        .attr('width',x.bandwidth())
         .style('fill',bronze);
 
       var barsGold = chart.append('g').selectAll('.bar')
@@ -74,7 +72,7 @@ d3.csv('data/olympics.csv',
           .attr('x',function(d){return x(d.country)})
           .attr('height',function(d){return 500 - y(d.silver + d.gold)})
           .attr('y',function(d){return y(d.silver + d.gold)})
-          .attr('width',32)
+          .attr('width',x.bandwidth())
           .style('fill',silver);
 
       var barsGold = chart.append('g').selectAll('.bar')
@@ -83,7 +81,7 @@ d3.csv('data/olympics.csv',
           .attr('x',function(d){return x(d.country)})
           .attr('height',function(d){return 500 - y(d.gold)})
           .attr('y',function(d){return y(d.gold)})
-          .attr('width',32)
+          .attr('width',x.bandwidth())
           .style('fill',gold);
 
           var gY = svg.append('g')
@@ -91,25 +89,5 @@ d3.csv('data/olympics.csv',
             .attr('transform','translate('+leftPadding+','+topPadding+')');
 
       var legend = svg.append('g').attr('class','legend');
-
-
-      d3.select('.chart')
-        .call(d3.zoom()
-          .scaleExtent([1,1])
-          .on('zoom',zoomed)
-      );
-
-      svg.append('rect')
-        .attr('width','70vw')
-        .attr('height',620)
-        .style('fill','none')
-        .style('pointer-events','all')
-        .call(d3.zoom()
-          .on('zoom',zoomed));
-
-      function zoomed() {
-        chart.attr('transform','translate('+(d3.event.transform.x+leftPadding)+','+topPadding+')');
-        gX.call(xAxis).attr('transform','translate('+(d3.event.transform.x+leftPadding)+','+(500+topPadding)+')')
-      }
   }
 )
