@@ -89,5 +89,12 @@ d3.csv('data/olympics.csv',
             .attr('transform','translate('+leftPadding+','+topPadding+')');
 
       var legend = svg.append('g').attr('class','legend');
+        legend.append('rect').attr('class','legend-lab').attr('x',0).attr('width',x.bandwidth()).attr('height',x.bandwidth()).style('fill',gold);
+        legend.append('text').attr('class','legend-lab').attr('x',0).attr('y',x.bandwidth()*1.5).text('gold');
+        legend.append('rect').attr('class','legend-lab').attr('x',x.bandwidth()*2).attr('width',x.bandwidth()).attr('height',x.bandwidth()).style('fill',silver);
+        legend.append('text').attr('class','legend-lab').attr('x',x.bandwidth()*2).attr('y',x.bandwidth()*1.5).text('silver');
+        legend.append('rect').attr('class','legend-lab').attr('x',x.bandwidth()*4).attr('width',x.bandwidth()).attr('height',x.bandwidth()).style('fill',bronze);
+        legend.append('text').attr('class','legend-lab').attr('x',x.bandwidth()*4).attr('y',x.bandwidth()*1.5).text('bronze');
+      legend.attr('transform','translate('+(w*0.7)+',0)');
   }
 )

@@ -25,3 +25,6 @@ span.label {
 span.label:after {
   content:" ";
 }
+.legend-lab {
+  font-size:10px;
+}
