@@ -1,8 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=Encode+Sans|Share:700');
+@import url('https://fonts.googleapis.com/css?family=Encode+Sans:400,700|Share:700');
 body {
   font-family: 'Encode Sans', sans-serif;
   text-align: center;
-  margin: 5vh 10vw 5vw 10vh;
+  margin: 5vh 10vw 5vh 10vw;
+  background-color: #f6ffff;
 }
 h1 {
   font-family: 'Share', sans-serif;
@@ -15,4 +16,12 @@ h2 {
 }
 .charts-main {
   margin: 5vh 0 5vh 0;
+}
+span.label {
+  color:#383535;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+span.label:after {
+  content:" ";
 }
