@@ -46,9 +46,9 @@ d3.csv('data/olympics.csv',
       .attr('transform','translate('+leftPadding+','+(500+topPadding)+')')
       .attr('class','x-axis');
 
-    var gold = '#ffc647';
-    var silver = '#e6e1db';
-    var bronze = '#ff7b50';
+    var gold = '#facc28';
+    var silver = '#d2d0cd';
+    var bronze = '#f79a2d';
 
     svg.selectAll('.x-axis text')
       .attr('transform','translate(12,10) rotate(90) ')
@@ -60,17 +60,19 @@ d3.csv('data/olympics.csv',
     var bars = chart.append('g').selectAll('.bar')
       .data(data)
       .enter().append('rect')
+        .attr('class','bar')
         .attr('x',function(d){return x(d.country)})
-        .attr('height',function(d){return 500 - y(d.total)})
-        .attr('y',function(d){return y(d.total)})
+        .attr('height',function(d){return 500 - y(d.bronze)})
+        .attr('y',function(d){return y(d.silver + d.gold + d.bronze)})
         .attr('width',x.bandwidth())
         .style('fill',bronze);
 
       var barsGold = chart.append('g').selectAll('.bar')
         .data(data)
         .enter().append('rect')
+          .attr('class','bar')
           .attr('x',function(d){return x(d.country)})
-          .attr('height',function(d){return 500 - y(d.silver + d.gold)})
+          .attr('height',function(d){return 500 - y(d.silver)})
           .attr('y',function(d){return y(d.silver + d.gold)})
           .attr('width',x.bandwidth())
           .style('fill',silver);
@@ -78,6 +80,7 @@ d3.csv('data/olympics.csv',
       var barsGold = chart.append('g').selectAll('.bar')
         .data(data)
         .enter().append('rect')
+          .attr('class','bar')
           .attr('x',function(d){return x(d.country)})
           .attr('height',function(d){return 500 - y(d.gold)})
           .attr('y',function(d){return y(d.gold)})

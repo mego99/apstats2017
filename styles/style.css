@@ -1,30 +1,54 @@
-@import url('https://fonts.googleapis.com/css?family=Encode+Sans:400,700|Share:700');
+@font-face {
+  font-family: 'Theinhardt';
+  src: url('../fonts/theinhardtreg-webfont.woff') format('woff');
+}
+@font-face {
+  font-family: 'Theinhardt Bold';
+  src: url('../fonts/theinhardtbold-webfont.woff') format('woff');
+}
+@font-face {
+  font-family: 'GT Walsheim Bold';
+  src: url('../fonts/GT-Walsheim-Pro-Bold.woff') format('woff');
+}
+@font-face {
+  font-family: 'GT Walsheim Medium';
+  src: url('../fonts/GT-Walsheim-Pro-Medium.woff') format('woff');
+}
+
 body {
-  font-family: 'Encode Sans', sans-serif;
+  font-family: 'Theinhardt', sans-serif;
   text-align: center;
   margin: 5vh 10vw 5vh 10vw;
-  background-color: #f6ffff;
 }
 h1 {
-  font-family: 'Share', sans-serif;
+  font-family: 'GT Walsheim Bold', sans-serif;
   font-size: 5em;
   margin:0;
 }
 h2 {
-  font-family: 'Share', sans-serif;
+  font-family: 'GT Walsheim Bold', sans-serif;
   font-size: 1.5em;
+  text-transform: uppercase;
 }
 .charts-main {
   margin: 5vh 0 5vh 0;
 }
 span.label {
   color:#383535;
-  text-transform: uppercase;
-  font-weight: 700;
+  font-family: 'Theinhardt Bold', sans-serif;
 }
 span.label:after {
   content:" ";
 }
 .legend-lab {
   font-size:10px;
+}
+text {
+  font-family: 'Theinhardt', sans-serif;
+}
+.bar:hover {
+  opacity: 0.5;
+}
+.chart-wrapper {
+  margin: 10vh 0 10vh 0;
 }
