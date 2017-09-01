@@ -1,6 +1,8 @@
 "use strict";
 
-var svg = d3.select('.olympics-ch')
+var olympics = {};
+
+olympics.svg = d3.select('.olympics-ch')
   .attr('width','70vw')
   .attr('height',620);
 
@@ -41,7 +43,7 @@ d3.csv('data/olympics.csv',
 
     var yAxis = d3.axisLeft(y).ticks(20);
 
-    var gX = svg.append('g')
+    var gX = olympics.svg.append('g')
       .call(xAxis)
       .attr('transform','translate('+leftPadding+','+(500+topPadding)+')')
       .attr('class','x-axis');
@@ -50,11 +52,11 @@ d3.csv('data/olympics.csv',
     var silver = '#d2d0cd';
     var bronze = '#f79a2d';
 
-    svg.selectAll('.x-axis text')
+    olympics.svg.selectAll('.x-axis text')
       .attr('transform','translate(12,10) rotate(90) ')
       .attr('text-anchor','start');
 
-    var chart = svg.append('g')
+    var chart = olympics.svg.append('g')
       .attr('transform','translate('+leftPadding+','+topPadding+')').attr('class','chart');
 
     var bars = chart.append('g').selectAll('.bar')
@@ -87,11 +89,11 @@ d3.csv('data/olympics.csv',
           .attr('width',x.bandwidth())
           .style('fill',gold);
 
-          var gY = svg.append('g')
+          var gY = olympics.svg.append('g')
             .call(yAxis)
             .attr('transform','translate('+leftPadding+','+topPadding+')');
 
-      var legend = svg.append('g').attr('class','legend');
+      var legend = olympics.svg.append('g').attr('class','legend');
         legend.append('rect').attr('class','legend-lab').attr('x',0).attr('width',x.bandwidth()).attr('height',x.bandwidth()).style('fill',gold);
         legend.append('text').attr('class','legend-lab').attr('x',0).attr('y',x.bandwidth()*1.5).text('gold');
         legend.append('rect').attr('class','legend-lab').attr('x',x.bandwidth()*2).attr('width',x.bandwidth()).attr('height',x.bandwidth()).style('fill',silver);
